@@ -2,7 +2,7 @@ class ShoppingCartPage
   NAME_COLUMN = 1
   SUBTOTAL_COLUMN = 3
   LINES_PER_PUPPY = 6
-  
+
   def initialize(browser)
     @browser = browser
   end
@@ -18,6 +18,8 @@ class ShoppingCartPage
   def cart_total
     @browser.td(:class => 'total_cell').text
   end
+
+  private
 
   def row_for(line_item)
     (line_item - 1) * LINES_PER_PUPPY
