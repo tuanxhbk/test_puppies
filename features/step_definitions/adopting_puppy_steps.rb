@@ -18,31 +18,32 @@ And(/^I click the Adopt Me button$/) do
 end
 
 And(/^I click the Adopt Another Puppy button$/) do
-  @browser.button(:value =>'Adopt Another Puppy').click
+  @cart.continue_shopping
 end
 
 And(/^I click the Complete the Adoption button$/) do
-  @browser.button(:value =>'Complete the Adoption').click
+  @cart.proceed_to_checkout
+  @checkout = CheckoutPage.new(@browser)
 end
 
 And(/^I enter "([^"]*)" in the name field$/) do |name|
-  @browser.text_field(:id =>'order_name').set(name)
+  @checkout.name = name
 end
 
 And(/^I enter "([^"]*)" in the address field$/) do |address|
-  @browser.textarea(:id =>'order_address').set(address)
+  @checkout.address = address
 end
 
 And(/^I enter "([^"]*)" in the email field$/) do |email|
-  @browser.text_field(:id =>'order_email').set(email)
+  @checkout.email = email
 end
 
-And(/^I select "([^"]*)" from the pay with dropdown$/) do |pay_option|
-  @browser.select_list(:id =>'order_pay_type').select(pay_option)
+And(/^I select "([^"]*)" from the pay with dropdown$/) do |pay_type|
+  @checkout.pay_type = pay_type
 end
 
 And(/^I click the Place Order button$/) do
-  @browser.button(:value =>'Place Order').click
+  @checkout.place_order
 end
 
 Then(/^I should see "([^"]*)"$/) do |expected_text|
