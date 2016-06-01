@@ -43,8 +43,38 @@ And(/^I select "([^"]*)" from the pay with dropdown$/) do |pay_type|
   on(CheckoutPage).pay_type = pay_type
 end
 
+And(/^I complete the adoption with:$/) do |table|
+  on(CheckoutPage).checkout(table.hashes.first)
+end
+
 And(/^I click the Place Order button$/) do
   on(CheckoutPage).place_order
+end
+
+And(/^I complete the adoption using a Credit card$/) do
+  on(CheckoutPage).checkout('pay_type' => 'Credit card')
+end
+
+And(/^I complete the adoption$/) do
+  on(CheckoutPage).checkout
+end
+
+When(/^I complete the adoption of a puppy$/) do
+  on(HomePage).select_puppy
+  on(DetailsPage).add_to_cart
+  on(ShoppingCartPage).proceed_to_checkout
+  on(CheckoutPage).checkout
+end
+
+When(/^I checkout leaving the name field blank$/) do
+  on(HomePage).select_puppy
+  on(DetailsPage).add_to_cart
+  on(ShoppingCartPage).proceed_to_checkout
+  on(CheckoutPage).checkout('name' => '')
+end
+
+Then(/^I should see the error message "([^"]*)"$/) do |msg|
+  expect(@current_page).to have_error_message msg
 end
 
 Then(/^I should see "([^"]*)"$/) do |expected_text|

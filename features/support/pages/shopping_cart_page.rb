@@ -1,5 +1,8 @@
+require_relative 'side_menu_panel'
+
 class ShoppingCartPage
   include PageObject
+  include SideMenuPanel
 
   NAME_COLUMN = 1
   SUBTOTAL_COLUMN = 3

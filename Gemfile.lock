@@ -61,6 +61,8 @@ PLATFORMS
 
 DEPENDENCIES
   cucumber
+  data_magic
+  faker
   page-object
   rake
   rspec
